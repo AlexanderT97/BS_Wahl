@@ -1,16 +1,26 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const path = require('path');
+require('dotenv').config();
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
+
+app.use(cors());
+app.use(express.json());
 
 // MongoDB-Verbindung
-const mongoUri = 'mongodb+srv://alextischler:9U39tKCAQ4Ps5P7J@wahlbs.jp4z3.mongodb.net/wahlsystem'; // Hier deine MongoDB Atlas URI einfügen
-mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Verbunden mit MongoDB'))
     .catch(err => console.error('Fehler bei der Verbindung mit MongoDB:', err));
+
+
+
+// Server starten
+app.listen(PORT, () => {
+    console.log(`Server läuft auf Port ${PORT}`);
+});
+
 
 // Middleware
 app.use(bodyParser.json());
