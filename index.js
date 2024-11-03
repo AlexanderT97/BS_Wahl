@@ -37,7 +37,7 @@ const resultSchema = new mongoose.Schema({ option: String, count: { type: Number
 const Result = mongoose.model('Result', resultSchema);
 
 // Route für Abstimmung
-app.post('/vote', async (req, res) => {
+app.post('https://bs-wahl.vercel.app/votes', async (req, res) => {
     const { code, voteOption } = req.body;
 
     // Überprüfen, ob code und voteOption vorhanden sind
@@ -67,7 +67,7 @@ app.post('/vote', async (req, res) => {
 });
 
 // Route, um die Wahlergebnisse abzurufen
-app.get('/results', async (req, res) => {
+app.get('https://bs-wahl.vercel.app/results', async (req, res) => {
     try {
         // Gruppiere die Votes nach der gewählten Option und zähle die Stimmen
         const results = await Vote.aggregate([
