@@ -1,0 +1,560 @@
+*{
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --blue: #0354e7;
+    --grey: #e9e7d8;
+    --black: #1e1f19;
+    --darkblue: #1a50b8;
+    --lightblue: #1395e8;
+}
+
+html, label{
+    cursor: url(img/Mouse.png) 0 0, auto;
+}
+
+
+body{
+    background-image: url(img/wxp.webp);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    font-family: Tahoma;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    
+}
+
+.fenster{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--grey);
+    position: absolute; 
+    user-select: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 5px solid var(--blue);
+    top: 30%;
+    left: 40%;
+    
+}
+
+.titel{
+    background-color: var(--blue);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    gap: 0.5rem;
+    width: 100%;
+    
+}
+
+.titel h1{
+    color: white;
+    text-shadow: 2px 2px var(--black);
+    font-size: 1.8rem;
+    font-family: 'Trebuchet MS';
+    margin-left: 0;
+}
+
+.titel img{
+    margin-right: 0;
+}
+
+
+.inhalt{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    gap: 0.5rem;
+    
+}
+
+footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--blue);
+    color: white;
+    height: fit-content;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: inset 0 10px 10px rgba(19, 149, 232, 0.5);
+    font-size: 0.8rem;
+}
+
+.bottom_left{
+    display: flex;
+    align-items: center;
+    margin-left: 0;
+    gap: 10px;
+}
+
+#start{
+    height: 100%;
+}
+
+.bottom_right{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 0;
+    background-color: var(--lightblue);
+    padding: 6.5px;
+    border-left: 2px solid var(--black);
+}
+
+.task{
+    background-color: var(--darkblue);
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: white;
+    box-shadow: inset 0 5px 5px rgba(19, 149, 232, 0.5);
+    cursor: url(img/Pointer.png) 0 0, auto;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+input{
+    background-color: var(--grey);
+    border: 2px solid var(--black);
+    border-radius: 2px;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+}
+
+input:focus{
+    background-color: white;
+}
+
+button{
+    background-color: var(--grey);
+    box-shadow: inset -1px -1px 0 rgba(30, 31, 25, 0.5);
+    padding: 0.5rem;
+    border-radius: 2px;
+    border: 1px solid var(--black);
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+button:hover{
+    box-shadow: inset 0 0 1px 2px rgba(3, 84, 231, 0.5);
+}
+
+.icon, #maske{
+    user-select: none;
+    -webkit-user-drag: none;  
+    pointer-events: none; 
+}
+
+.draggable{
+    position: absolute; 
+    user-select: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.draggable p{
+    color: white;
+}
+
+.desktop_icon{
+    width: min-content;
+    padding: 0.5rem;
+    left: 20px;
+}
+
+.trash{
+    top: 8px;
+}
+
+#mypc_desktop{
+    top: 120px;
+}
+
+.privat{
+    top: 250px;
+}
+
+.musik{
+    top: 360px;
+}
+
+.desktop_icon:hover{
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    
+}
+
+.error p{
+    color: var(--black);
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+#error_icon{
+    padding-bottom: 0.5rem;
+}
+
+.song{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 0.5rem;
+    align-items: center;
+}
+.song h3{
+    margin-left: 0;
+}
+
+.song i{
+    margin-right: 0;
+    font-size: 1.5rem;
+}
+
+.privat_fenster{
+  background-image: url(img/matrix.gif);
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.start_fenster{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--blue);
+    position: absolute;
+    left: 0;
+    bottom: 31px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 5px solid var(--blue);
+    z-index: 6000;
+}
+
+.start_titel{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--blue);
+    padding: 1rem;
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(0.25turn, rgba(255, 255, 255, 0), #fe8b1b, rgba(56,2,155,0));
+    border-image-slice: 1;
+    color: white;
+    width: 100%;
+    
+}
+
+.start_titel img{
+    border-radius: 5px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.start_titel h2{
+    margin-left: 0;
+}
+
+.start_bottom{
+    display: flex;
+    align-items: center;
+    margin-right: 0;
+    background-color: var(--blue);
+    padding: 1rem;
+    width: 100%;
+    color: white;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.start_middle{
+    display: flex;   
+    margin: 0 0.1rem;
+}
+
+.start_items{
+    display: flex;
+    align-items: center;
+    margin-left: 0;
+    gap: 0.5rem;
+}
+
+.start_fenster_right{
+    display: flex;
+    flex-direction: column;
+    background-color: #d3e4fb;
+    width: 50%;
+    padding: 1rem;
+    padding-bottom: 3rem;
+    gap: 1rem;
+}
+
+.start_fenster_left{
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    width: 50%;
+    padding: 1rem;
+    padding-bottom: 3rem;
+    gap: 1rem;
+}
+
+.items_bottom{
+    margin-right: 0;
+}
+
+#startup, #shutdown, #login{
+    height: 100vh;
+    width: 100%;
+    z-index: 9888;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 1s ease;
+    overflow: hidden;
+    cursor: none;
+}
+
+#startup{
+    background-image: url(img/startup.png);
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#shutdown{
+    display: none;
+    background-image: url(img/shutdown.png);
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    
+}
+
+.blackout{
+    background-color: #000000;
+    height: 100vh;
+    width: 100%;
+    display: none;
+    z-index: 9999;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    cursor: none;
+}
+
+#login{
+    background-image: url(img/login_background.png);
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    cursor: url(img/Mouse.png) 0 0, auto;;
+    flex-direction: column;
+    gap: 1rem;
+    display: none;
+    transition: opacity 0.5s ease;
+}
+
+.login_fenster{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-left: 40rem;
+    color: white;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-btn {
+    padding: 10px;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--grey);
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    padding: 10px;
+}
+
+.dropdown-content img {
+    width: 50px;
+    height: auto;
+    margin: 5px 0;
+    border: 1px solid transparent;
+    transition: border 0.3s;
+}
+
+.dropdown-content img:hover {
+    border-color: var(--blue);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+#previewImage {
+    margin-top: 20px;
+    max-width: 200px;
+}
+
+#label_name{
+    font-size: 1.2rem;
+}
+
+textarea{
+    background-color: var(--black);
+    resize: none;
+    width: 20rem;
+    height: 10rem;
+    color: white;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+.editor_text{
+    padding: 0;
+}
+
+.calculator {
+    padding: 1rem;
+}
+
+#display {
+    width: 100%;
+    height: 2rem;
+    text-align: right;
+    color: var(--black);
+}
+
+.rechner_buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.rechner_btn {
+    padding: 20px;
+    font-size: 1.1rem;
+    background-color: var(--blue);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.rechner_btn:hover {
+    background-color: var(--darkblue);
+}
+
+.internet_text p{
+    color: var(--black);
+}
+
+
+.overlay{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-repeat: repeat;
+    background-image: url(img/crack_textur.jpg);
+    mix-blend-mode: lighten;
+    pointer-events: none;
+    display: none;
+    background-size: 100% 100%;
+    z-index: 8000;
+}
+
+
+.mypc_inhalt p{
+    color: var(--black);
+    width: 50%;
+}
+
+.mypc_inhalt div{
+    border-bottom: 2px solid var(--black);
+    width: 100%;
+}
+
+/* Container für Balken und Bilder */
+.result-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+
+.bar {
+    width: 5rem; /* Balkenbreite */
+    text-align: center;
+    color: white;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+
+.result-image {
+    height: auto;
+    margin-top: 1rem;
+}
+
+.wahl_input{
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+}
+
+.optionen{
+    display: flex;
+    flex-direction: column;
+}
+
+input[type=radio]{
+    margin-top: 0.1rem;
+}
+
+.optionen p, #confirmPopup p{
+    color: var(--black);
+    font-size: 1.5rem;
+    margin: 1rem 0;
+}
+
+#privat_fenster, #privat_task, #musik_fenster, #musik_task, #error, .start_fenster, #editor_fenster, #editor_task, #rechner_fenster, #rechner_task, #internet_fenster, #internet_task, #mypc_fenster, #mypc_task, #ergebnis_fenster, #ergebnis_task, #confirmPopup{
+    display: none;
+}
+
+input, button, .titel img:hover, .song i, .start_items:hover, #start, #go, .dropdown-content img, .dropdown-btn, .rechner_btn{
+    cursor: url(img/Pointer.png) 0 0, auto;
+}

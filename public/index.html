@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BS Wahl</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/69836dacc4.js" crossorigin="anonymous" async></script>
+    <link href="img/favicon.ico" rel="icon">
+</head>
+<body>
+
+    <!-- Startscreen -->
+    <div id="startup">
+        <audio id="start_sound" src="sounds/startup.mp3"></audio>
+    </div>
+
+    <!-- Log In -->
+     <div id="login">
+        <div class="login_fenster">
+    
+        <form id="inputForm">
+            <label for="name" id="label_name">Benutzername:</label><br>
+            <input type="text" id="name" required>
+            <br><br>
+            
+            <div class="dropdown">
+                <div class="dropdown-btn" id="selectedImageDisplay">Profilbild auswählen</div>
+                <div class="dropdown-content">
+                    <img src="img/profil_butterfly.png" alt="profil_butterfly" onclick="selectImage('profil_butterfly.png')">
+                    <img src="img/profil_ente.png" alt="profil_ente" onclick="selectImage('profil_ente.png')">
+                    <img src="img/profil_katze.png" alt="profil_katze" onclick="selectImage('profil_katze.png')">
+                    <img src="img/profil_fisch.png" alt="profil_fisch" onclick="selectImage('profil_fisch.png')">
+                    <img src="img/profil_frosch.png" alt="profil_frosch" onclick="selectImage('profil_frosch.png')">
+                    <img src="img/profil_tropfen.png" alt="profil_tropfen" onclick="selectImage('profil_tropfen.png')">
+                </div>
+            </div>
+    
+            <input type="hidden" id="selectedImage" required>
+            <br><br>
+    
+            <img src="img/go.png" alt="go" id="go" onclick="displayData()">
+        
+        </div>
+     </div>
+    
+    <!-- Shutdown -->
+     <div id="shutdown">
+        <audio id="shutdown_sound" src="sounds/shutdown.mp3"></audio>
+     </div>
+
+     <div class="blackout" id="blackout"></div>
+
+    <!-- Desktop -->
+    <div class="trash draggable desktop_icon" id="trash">
+        <img src="img/trash.png" alt="trash" class="icon" id="trashImage">
+        <p>Papierkorb</p>
+    </div>
+
+    <div class="mypc draggable desktop_icon deletable" id="mypc_desktop">
+        <img src="img/computer.png" alt="computer" class="icon">
+        <p>Mein Computer</p>
+    </div>
+
+    <audio id="crack" src="sounds/crack.mp3"></audio>
+
+    <div class="privat draggable desktop_icon deletable" id="privat_desktop">
+        <img src="img/ordner.png" alt="ordner" class="icon">
+        <p>Privat</p>
+    </div>
+
+    <div class="musik draggable desktop_icon deletable" id="musik_desktop">
+        <img src="img/ordner.png" alt="ordner" class="icon">
+        <p>Musik</p>
+    </div>
+    
+    <audio src="sounds/recyle.mp3" id="delete_sound"></audio>
+
+    <div class="fenster draggable" id="confirmPopup">
+        <div class="titel">
+            <h1>Computer löschen?</h1>
+        </div>
+        <div class="inhalt">
+        <img src="img/skull.png" alt="skulls">
+        <p>Möchten Sie diesen Computer wirklich löschen?</p>
+        <div style="display: flex; gap: 1rem;"> 
+            <button id="confirmYes">Ja</button>
+            <button id="confirmNo">Nein</button>
+        </div>
+        
+        </div>
+    </div>
+
+     <!-- Fenster -->
+    <div class="privat_fenster fenster draggable" id="privat_fenster">
+        <div class="titel">
+            <h1>PRIVAT!</h1>
+            <img src="img/x.png" alt="x" id="privat_fenster_x">
+        </div>
+        <div class="inhalt">
+            <img src="img/maske.png" alt="maske" id="maske">
+        </div>
+    </div>
+
+    <div class="error fenster draggable" id="error">
+        <div class="titel">
+            <h1>Error</h1>
+            <img src="img/x.png" alt="x" id="error_x">
+        </div>
+        <div class="inhalt">
+            <img src="img/error.png" alt="error" id="error_icon">
+            <p>Du musst Wählen gehen!</p>
+        </div>
+    </div>
+
+    <div class="musik_fenster fenster draggable" id="musik_fenster">
+        <div class="titel">
+            <h1>Musik</h1>
+            <img src="img/x.png" alt="x" id="musik_fenster_x">
+        </div>
+        <div class="inhalt">
+            <div class="song">
+                <audio class="audioPlayer" src="sounds/startup.mp3"></audio>
+                <h3>Start Me Up!</h3>
+                <i class="playPauseIcon fa-solid fa-play"></i>
+            </div>
+
+            <div class="song">
+                <audio class="audioPlayer" src="sounds/ding.mp3"></audio>
+                <h3>Ding Dong</h3>
+                <i class="playPauseIcon fa-solid fa-play"></i>
+            </div>
+
+            <div class="song">
+                <audio class="audioPlayer" src="sounds/stop.mp3"></audio>
+                <h3>Don't Stop Me Now</h3>
+                <i class="playPauseIcon fa-solid fa-play"></i>
+            </div>
+
+            <div class="song">
+                <audio class="audioPlayer" src="sounds/recyle.mp3"></audio>
+                <h3>Let It Go</h3>
+                <i class="playPauseIcon fa-solid fa-play"></i>
+            </div>
+
+            <div class="song">
+                <audio class="audioPlayer" src="sounds/shutdown.mp3"></audio>
+                <h3>The Final Countdown</h3>
+                <i class="playPauseIcon fa-solid fa-play"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="editor_fenster fenster draggable" id="editor_fenster">
+        <div class="titel">
+            <h1>Editor</h1>
+            <img src="img/x.png" alt="x" id="editor_fenster_x">
+        </div>
+
+        <div class="inhalt editor_text">
+            <textarea name="editor" id="editor_textarea"></textarea>
+        </div>
+    </div>
+
+    <div class="rechner_fenster fenster draggable" id="rechner_fenster">
+        <div class="titel">
+            <h1>Rechner</h1>
+            <img src="img/x.png" alt="x" id="rechner_fenster_x">
+        </div>
+    <div class="calculator inhalt">
+        <input type="text" id="display" disabled />
+        <div class="rechner_buttons">
+            <button class="rechner_btn" onclick="appendToDisplay('1')">1</button>
+            <button class="rechner_btn" onclick="appendToDisplay('2')">2</button>
+            <button class="rechner_btn" onclick="appendToDisplay('3')">3</button>
+            <button class="rechner_btn" onclick="appendToDisplay('+')">+</button>
+            <button class="rechner_btn" onclick="appendToDisplay('4')">4</button>
+            <button class="rechner_btn" onclick="appendToDisplay('5')">5</button>
+            <button class="rechner_btn" onclick="appendToDisplay('6')">6</button>
+            <button class="rechner_btn" onclick="appendToDisplay('-')">-</button>
+            <button class="rechner_btn" onclick="appendToDisplay('7')">7</button>
+            <button class="rechner_btn" onclick="appendToDisplay('8')">8</button>
+            <button class="rechner_btn" onclick="appendToDisplay('9')">9</button>
+            <button class="rechner_btn" onclick="appendToDisplay('*')">*</button>
+            <button class="rechner_btn" onclick="appendToDisplay('0')">0</button>
+            <button class="rechner_btn" onclick="calculate()">=</button>
+            <button class="rechner_btn" onclick="clearDisplay()">C</button>
+            <button class="rechner_btn" onclick="appendToDisplay('/')">/</button>
+        </div>
+    </div>
+</div>
+
+<div class="internet_fenster fenster draggable" id="internet_fenster">
+    <div class="titel">
+        <h1>Internet Explorer</h1>
+        <img src="img/x.png" alt="x" id="internet_fenster_x">
+    </div>
+
+    <div class="inhalt internet_text">
+        <img src="img/no_connection.png" alt="no_connection">
+        <h2>Keine Internetverbindung!</h2>
+        <p>Bitte überprüfe dein Modem</p>
+    </div>
+</div>
+
+<div class="mypc_fenster fenster draggable" id="mypc_fenster">
+    <div class="titel">
+        <h1>Mein Computer</h1>
+        <img src="img/x.png" alt="x" id="mypc_fenster_x">
+    </div>
+
+    <div class="inhalt mypc_inhalt">
+        <div class="internet start_items" id="internet_icon">
+            <img src="img/internet.png" alt="internet">
+            <p>Internet Explorer</p>
+        </div>
+        <div class="editor start_items" id="editor_icon">
+            <img src="img/notepad.webp" alt="notepad">
+            <p>Editor</p>
+        </div>
+        <div class="rechner start_items" id="rechner_icon">
+            <img src="img/rechner.png" alt="rechner">
+            <p>Rechner</p>
+        </div>
+        <div class="start_items privat_icon" id="privat_icon">
+            <img src="img/ordner_icon.png" alt="ordner">
+            <p>Privat</p>
+        </div>
+        <div class="start_items musik_icon" id="musik_icon">
+            <img src="img/ordner_icon.png" alt="ordner">
+            <p>Musik</p>
+        </div>
+    </div>
+</div>
+
+
+    <div class="start_fenster" id="start_fenster">
+        <div class="start_titel">
+            <img id="outputImage" alt="profil">
+            <h2 id="outputName"></h2>
+        </div>
+        <div class="start_middle">
+            <div class="start_fenster_left">
+                <div class="internet start_items" id="internet_icon">
+                    <img src="img/internet.png" alt="internet">
+                    <p>Internet Explorer</p>
+                </div>
+                <div class="editor start_items" id="editor_icon">
+                    <img src="img/notepad.webp" alt="notepad">
+                    <p>Editor</p>
+                </div>
+                <div class="rechner start_items" id="rechner_icon">
+                    <img src="img/rechner.png" alt="rechner">
+                    <p>Rechner</p>
+                </div>
+            </div>
+
+            <div class="start_fenster_right">
+                <div class="start_items privat_icon" id="privat_icon">
+                    <img src="img/ordner_icon.png" alt="ordner">
+                    <p>Privat</p>
+                </div>
+                <div class="start_items musik_icon" id="musik_icon">
+                    <img src="img/ordner_icon.png" alt="ordner">
+                    <p>Musik</p>
+                </div>
+                <div class="start_items" id="mypc_icon">
+                    <img src="img/computer_icon.png" alt="computer">
+                    <p>Mein Computer</p>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="start_bottom">
+            <div class="log_off start_items items_bottom" id="logoff">
+                <img src="img/logoff.png" alt="logoff">
+                <p>Abmelden</p>
+            </div>
+
+            <div class="turn_off start_items items_bottom" id="turnoff">
+                <img src="img/turnoff.png" alt="turnoff">
+                <p>Ausschalten</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="fenster draggable">
+        <div class="titel">
+            <h1>Betriebssystem Wahl 2024</h1>
+            <img src="img/x.png" alt="x" id="wahl_x">
+        </div>
+        <div class="inhalt">
+            <div class="wahl_input">
+                <label for="codeInput">Gib deinen Abstimmungscode ein:</label>
+                <input type="text" id="codeInput" required oninput="checkAdminCode(event)">
+            </div>
+            
+            <div class="optionen">
+                <p>Wähle dein Betriebssystem:</p>
+                <input type="radio" name="voteOption" value="Windows" id="optionWindows" required>
+                <label for="optionWindows">Windows</label><br>
+                <input type="radio" name="voteOption" value="Apple" id="optionApple" required>
+                <label for="optionApple">Apple</label><br>
+                <input type="radio" name="voteOption" value="Linux" id="optionLinux" required>
+                <label for="optionLinux">Linux</label><br>
+            </div>
+            
+            
+            <button type="button" onclick="submitVote(event)">Abstimmen</button>
+            
+            <div>
+                <button id="adminResultsButton" style="display:none;" onclick="fetchResults()">Ergebnisse anzeigen</button>
+            </div>
+            
+
+        </div>
+    </div>
+
+    <div class="fenster draggable" id="ergebnis_fenster">
+        <div class="titel">
+            <h1>Ergebnisse</h1>
+            <img src="img/x.png" alt="x" id="ergebnis_fenster_x">
+        </div>
+        <div class="inhalt">
+            <div id="resultsContainer" style="display: flex; justify-content: space-around; align-items: flex-end;"></div>
+        </div>
+    </div>
+
+    <!-- Taskleiste -->
+    <footer>
+        <div class="bottom_left">
+            <img src="img/start-btn.png" alt="start-btn" id="start">
+            <div class="task">
+                <img src="img/ordner_mini.png" alt="ordner_mini">
+                <p>BS Wahl 2024</p>
+            </div>
+
+            <div class="task" id="internet_task">
+                <img src="img/ie.png" alt="internet explorer">
+                <p>Internet Explorer</p>
+            </div>
+
+            <div class="task" id="privat_task">
+                <img src="img/ordner_mini.png" alt="ordner_mini">
+                <p>PRIVAT!</p>
+            </div>
+
+            <div class="task" id="musik_task">
+                <img src="img/ordner_mini.png" alt="ordner_mini">
+                <p>Musik</p>
+            </div>
+
+            <div class="task" id="mypc_task">
+                <img src="img/computer_mini.png" alt="computer_mini">
+                <p>Mein Computer</p>
+            </div>
+
+            <div class="task" id="editor_task">
+                <img src="img/notepad_mini.png" alt="notepad_mini">
+                <p>Editor</p>
+            </div>
+
+            <div class="task" id="rechner_task">
+                <img src="img/rechner_mini.png" alt="rechner_mini">
+                <p>Rechner</p>
+            </div>
+
+            <div class="task" id="ergebnis_task">
+                <img src="img/ordner_mini.png" alt="ordner_mini">
+                <p>Ergebnisse</p>
+            </div>
+        </div>
+        
+
+        <div class="bottom_right">
+            <img src="img/win-bottom.png" alt="win-bottom">
+            <p id="time">15:00</p>
+        </div>
+        
+    </footer>
+
+    <div class="overlay" id="overlay"></div>
+    <script src="app.js"></script>
+</body>
+</html>
