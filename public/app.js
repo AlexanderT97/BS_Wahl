@@ -621,7 +621,7 @@ async function submitVote(event) {
     console.log('Gewählte Option:', voteOption); // Debugging
 
     // POST-Anfrage an den Server
-    const response = await fetch('/votes', {
+    const response = await fetch('/vote', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -638,9 +638,6 @@ async function submitVote(event) {
         alert(result.message); // Erfolgreiche Nachricht
     }
 }
-
-
-
 
 // Funktion, um Wahlergebnisse abzurufen und anzuzeigen
 async function fetchResults() {
@@ -703,4 +700,3 @@ async function fetchResults() {
         console.error("Fehler beim Abrufen der Ergebnisse:", error);
     }
 }
-
