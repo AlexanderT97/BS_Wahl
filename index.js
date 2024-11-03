@@ -12,8 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB-Verbindung
-const mongoUri = 'mongodb+srv://alextischler:9U39tKCAQ4Ps5P7J@wahlbs.jp4z3.mongodb.net/wahlsystem'; // Hier deine MongoDB Atlas URI einfügen
-mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Verbunden mit MongoDB'))
     .catch(err => console.error('Fehler bei der Verbindung mit MongoDB:', err));
 
@@ -58,11 +57,11 @@ app.post('/vote', async (req, res) => {
     // Ergebnisse aktualisieren
     await Result.findOneAndUpdate(
         { option: voteOption },
-        { $inc: { count: 1 } },
-        { upsert: true }
+        { $inc: { count: 1 } }, 
+        { upsert: true } 
     );
 
-    await Code.updateOne({ code }, { used: true });
+    await Code.updateOne({ code }, { used: true }); 
     res.status(200).json({ message: 'Stimme erfolgreich abgegeben!' });
 });
 
@@ -82,12 +81,8 @@ app.get('/results', async (req, res) => {
     }
 });
 
+
 // Server starten
 app.listen(PORT, () => {
     console.log(`Server läuft auf http://localhost:${PORT}`);
-});
-
-
-app.use((req, res, next) => {
-    res.status(404).json({ message: 'Route nicht gefunden' });
 });
