@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 //Zeit aktualisieren
 function updateTime() {
     const now = new Date();
