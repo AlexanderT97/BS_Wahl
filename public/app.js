@@ -621,7 +621,7 @@ async function submitVote(event) {
     console.log('Gewählte Option:', voteOption); // Debugging
 
     // POST-Anfrage an den Server
-    const response = await fetch('/vote', {
+    const response = await fetch('/api/vote', { // API-Pfad angepasst
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -639,13 +639,10 @@ async function submitVote(event) {
     }
 }
 
-
-
-
 // Funktion, um Wahlergebnisse abzurufen und anzuzeigen
 async function fetchResults() {
     try {
-        const response = await fetch('https://bs-wahl.vercel.app/results');
+        const response = await fetch('/api/results'); // API-Pfad angepasst
         if (!response.ok) {
             throw new Error("Fehler beim Abrufen der Ergebnisse.");
         }
@@ -703,4 +700,5 @@ async function fetchResults() {
         console.error("Fehler beim Abrufen der Ergebnisse:", error);
     }
 }
+
 
