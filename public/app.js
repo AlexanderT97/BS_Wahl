@@ -645,7 +645,7 @@ async function submitVote(event) {
 // Funktion, um Wahlergebnisse abzurufen und anzuzeigen
 async function fetchResults() {
     try {
-        const response = await fetch('http://localhost:5000/results');
+        const response = await fetch('/results');
         if (!response.ok) {
             throw new Error("Fehler beim Abrufen der Ergebnisse.");
         }
