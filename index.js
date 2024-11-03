@@ -38,7 +38,7 @@ const Result = mongoose.model('Result', resultSchema, 'results'); // Verwendung 
 
 
 // Route für Abstimmung
-app.post('https://bs-wahl.vercel.app/vote', async (req, res) => {
+app.post('https://bs-wahl.vercel.app/votes', async (req, res) => {
     const { code, voteOption } = req.body;
 
     // Überprüfen, ob code und voteOption vorhanden sind
