@@ -621,7 +621,7 @@ async function submitVote(event) {
     console.log('Gewählte Option:', voteOption); // Debugging
 
     // POST-Anfrage an den Server
-    const response = await fetch('/vote', {
+    const response = await fetch('/votes', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
