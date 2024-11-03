@@ -85,3 +85,8 @@ app.get('/results', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server läuft auf http://localhost:${PORT}`);
 });
+
+
+app.use((req, res, next) => {
+    res.status(404).json({ message: 'Route nicht gefunden' });
+});
