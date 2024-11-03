@@ -12,7 +12,8 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB-Verbindung
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+const mongoUri = 'mongodb+srv://alextischler:9U39tKCAQ4Ps5P7J@wahlbs.jp4z3.mongodb.net/wahlsystem'; // Hier deine MongoDB Atlas URI einfügen
+mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Verbunden mit MongoDB'))
     .catch(err => console.error('Fehler bei der Verbindung mit MongoDB:', err));
 
