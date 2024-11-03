@@ -621,7 +621,7 @@ async function submitVote(event) {
     console.log('Gewählte Option:', voteOption); // Debugging
 
     // POST-Anfrage an den Server
-    const response = await fetch('/api/vote', {
+    const response = await fetch('/vote', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -639,10 +639,13 @@ async function submitVote(event) {
     }
 }
 
+
+
+
 // Funktion, um Wahlergebnisse abzurufen und anzuzeigen
 async function fetchResults() {
     try {
-        const response = await fetch('/api/results');
+        const response = await fetch('http://localhost:5000/results');
         if (!response.ok) {
             throw new Error("Fehler beim Abrufen der Ergebnisse.");
         }
@@ -701,27 +704,3 @@ async function fetchResults() {
     }
 }
 
-// Funktion, um Codes abzurufen und anzuzeigen
-async function fetchCodes() {
-    try {
-        const response = await fetch('/api/codes');
-        if (!response.ok) {
-            throw new Error("Fehler beim Abrufen der Codes.");
-        }
-        const codes = await response.json();
-        console.log('Codes:', codes);
-        // Hier kannst du die Codes auf der Seite anzeigen oder weiterverarbeiten
-    } catch (error) {
-        console.error("Fehler beim Abrufen der Codes:", error);
-    }
-}
-
-// Event-Listener für den Abstimmen-Button
-document.getElementById('voteButton').addEventListener('click', submitVote);
-// Event-Listener für den Ergebnisse anzeigen-Button
-document.getElementById('adminResultsButton').addEventListener('click', fetchResults);
-// Event-Listener für das Eingabefeld (Code) zur Überprüfung
-document.getElementById('codeInput').addEventListener('input', checkAdminCode);
-
-// Codes beim Laden der Seite abrufen
-fetchCodes();
