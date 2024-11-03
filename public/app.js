@@ -80,7 +80,7 @@ document.addEventListener("mouseup", (event) => {
                 // Für andere deletable-Elemente: Element verstecken und Sound abspielen
                 currentElement.style.display = 'none';
                 deleteSound.play();
-                trashImage.src = "img/trash_full.png";
+                trashImage.src = "/img/trash_full.png";
             }
         }
 
@@ -97,7 +97,7 @@ confirmYes.addEventListener("click", () => {
 
     const mypc = document.getElementById("mypc_desktop");
     mypc.style.display = "none";
-    trashImage.src = "img/trash_full.png";
+    trashImage.src = "/img/trash_full.png";
     const crack = document.getElementById("crack");
     crack.play();
     setTimeout(() => {
@@ -445,7 +445,7 @@ function selectImage(imageName, altText) {
     const selectedImageInput = document.getElementById("selectedImage");
 
     // Setze den Text und das versteckte Feld auf die Auswahl
-    selectedImageDisplay.innerHTML = `<img src="img/${imageName}" alt="${altText}" style="width: 30px; height: auto;">`;
+    selectedImageDisplay.innerHTML = `<img src="/img/${imageName}" alt="${altText}" style="width: 30px; height: auto;">`;
     selectedImageInput.value = imageName;
 }
 
@@ -460,7 +460,7 @@ function displayData() {
         return;
     }
 
-    const imageUrl = "img/" + selectedImage;
+    const imageUrl = "/img/" + selectedImage;
     const outputName = document.getElementById("outputName");
     const outputImage = document.getElementById("outputImage");
 
@@ -687,9 +687,9 @@ async function fetchResults() {
             img.alt = result._id;
 
             // Bildpfad je nach Option setzen
-            if (result._id === "Windows") img.src = 'img/windows.png';
-            else if (result._id === "Apple") img.src = 'img/apple.png';
-            else if (result._id === "Linux") img.src = 'img/linux.png';
+            if (result._id === "Windows") img.src = '/img/windows.png';
+            else if (result._id === "Apple") img.src = '/img/apple.png';
+            else if (result._id === "Linux") img.src = '/img/linux.png';
 
             // Elemente in den Result-Bereich hinzufügen
             resultItem.appendChild(bar);
