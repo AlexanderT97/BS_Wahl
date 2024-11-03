@@ -621,7 +621,7 @@ async function submitVote(event) {
     console.log('Gewählte Option:', voteOption); // Debugging
 
     // POST-Anfrage an den Server
-    const response = await fetch('https://bs-wahl.vercel.app/votes', {
+    const response = await fetch('https://bs-wahl.vercel.app/vote', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
