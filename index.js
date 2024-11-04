@@ -2,34 +2,54 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const Vote = require('./models/Vote'); // Importiere dein Voting-Modell hier
 require('dotenv').config();
 
 const app = express();
 
 // Middleware
 app.use(cors({
-    origin: '*', // Für Entwicklung: Erlaube alle Ursprünge. In der Produktion spezifische URLs verwenden.
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Erlaubte HTTP-Methoden
-    allowedHeaders: ['Content-Type', 'Authorization'] // Erlaubte Header
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
-app.use(express.json()); // Erlaubt das Parsen von JSON-Anfragen
-app.use(express.static(path.join(__dirname, 'public'))); // Stelle statische Dateien aus dem "public"-Ordner bereit
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // MongoDB-Verbindung
 mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true, // Diese Optionen sind deprecated, aber hier zur Demonstration
+    useNewUrlParser: true,
     useUnifiedTopology: true
 })
 .then(() => console.log('Verbunden mit MongoDB'))
 .catch(err => console.error('Verbindungsfehler mit MongoDB:', err));
 
-// API-Routen importieren
-const voteRouter = require('./api/vote');
-const resultsRouter = require('./api/results');
+// POST-Route für Abstimmungen
+app.post('/api/vote', async (req, res) => {
+    const { code, voteOption } = req.body;
+    
+    try {
+        const newVote = new Vote({ code, voteOption });
+        await newVote.save();
+        res.status(200).json({ message: "Stimme erfolgreich abgegeben!" });
+    } catch (error) {
+        console.error("Fehler beim Speichern der Stimme:", error);
+        res.status(500).json({ message: "Fehler beim Speichern der Stimme." });
+    }
+});
 
-// API-Routen verwenden
-app.use('/api/vote', voteRouter);      // Diese Zeile verknüpft die Voting-Route
-app.use('/api/results', resultsRouter);  // Diese Zeile verknüpft die Resultate-Route
+// GET-Route für das Abrufen von Ergebnissen
+app.get('/api/results', async (req, res) => {
+    try {
+        const results = await Vote.aggregate([
+            { $group: { _id: "$voteOption", count: { $sum: 1 } } }
+        ]);
+        res.status(200).json(results);
+    } catch (error) {
+        console.error("Fehler beim Abrufen der Ergebnisse:", error);
+        res.status(500).json({ message: "Fehler beim Abrufen der Ergebnisse." });
+    }
+});
 
 // Statische Dateien bereitstellen
 app.get('/', (req, res) => {
@@ -38,4 +58,5 @@ app.get('/', (req, res) => {
 
 // Server-Export für Vercel
 module.exports = app;
+
 
