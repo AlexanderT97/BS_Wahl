@@ -617,7 +617,7 @@ async function submitVote(event) {
     }
 
     // POST-Anfrage an den Server
-    const response = await fetch('/api/vote', { // Hier sicherstellen, dass die Route korrekt ist
+    const response = await fetch('/vote', { // Hier sicherstellen, dass die Route korrekt ist
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -637,7 +637,7 @@ async function submitVote(event) {
 
 async function fetchResults() {
     try {
-        const response = await fetch('/api/results'); // Hier sicherstellen, dass die Route korrekt ist
+        const response = await fetch('/results'); // Hier sicherstellen, dass die Route korrekt ist
         if (!response.ok) {
             throw new Error("Fehler beim Abrufen der Ergebnisse.");
         }
