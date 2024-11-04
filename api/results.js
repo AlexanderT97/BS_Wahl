@@ -1,8 +1,8 @@
 const express = require('express');
-const Vote = require('../models/Vote'); // Importiere dein Vote-Modell
-
 const router = express.Router();
+const Vote = require('../models/Vote');
 
+// GET-Route für das Abrufen von Ergebnissen
 router.get('/', async (req, res) => {
     try {
         const results = await Vote.aggregate([
@@ -16,3 +16,4 @@ router.get('/', async (req, res) => {
 });
 
 module.exports = router;
+
