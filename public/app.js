@@ -598,9 +598,8 @@ function checkAdminCode(event) {
 }
 
 async function submitVote(event) {
-    // Standardaktion des Buttons verhindern
     if (event) event.preventDefault();
-
+    
     const code = document.getElementById('codeInput').value; // Abstimmungscode
     const voteOption = document.querySelector('input[name="voteOption"]:checked')?.value; // Gewählte Option
 
@@ -617,11 +616,8 @@ async function submitVote(event) {
         return;
     }
 
-    console.log('Code:', code); // Debugging
-    console.log('Gewählte Option:', voteOption); // Debugging
-
     // POST-Anfrage an den Server
-    const response = await fetch('/api/vote', { // API-Pfad angepasst
+    const response = await fetch('/api/vote', { // Hier sicherstellen, dass die Route korrekt ist
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -639,10 +635,9 @@ async function submitVote(event) {
     }
 }
 
-// Funktion, um Wahlergebnisse abzurufen und anzuzeigen
 async function fetchResults() {
     try {
-        const response = await fetch('/api/results'); // API-Pfad angepasst
+        const response = await fetch('/api/results'); // Hier sicherstellen, dass die Route korrekt ist
         if (!response.ok) {
             throw new Error("Fehler beim Abrufen der Ergebnisse.");
         }
@@ -687,9 +682,9 @@ async function fetchResults() {
             img.alt = result._id;
 
             // Bildpfad je nach Option setzen
-            if (result._id === "Windows") img.src = '/img/windows.png';
-            else if (result._id === "Apple") img.src = '/img/apple.png';
-            else if (result._id === "Linux") img.src = '/img/linux.png';
+            if (result._id === "Windows") img.src = 'img/windows.png';
+            else if (result._id === "Apple") img.src = 'img/apple.png';
+            else if (result._id === "Linux") img.src = 'img/linux.png';
 
             // Elemente in den Result-Bereich hinzufügen
             resultItem.appendChild(bar);
@@ -700,5 +695,3 @@ async function fetchResults() {
         console.error("Fehler beim Abrufen der Ergebnisse:", error);
     }
 }
-
-
