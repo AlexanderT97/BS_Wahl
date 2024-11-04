@@ -6,14 +6,14 @@ const router = express.Router();
 router.post('/', async (req, res) => {
     const { code, voteOption } = req.body;
 
-    // Hier kommt die Logik für das Abstimmen, z.B.:
     try {
+        // Hier kommt die Logik für das Abstimmen
         const newVote = new Vote({ voteOption, code });
         await newVote.save();
-        res.status(201).json({ message: "Stimme erfolgreich abgegeben." });
+        res.status(201).json({ message: "Abstimmung erfolgreich!" });
     } catch (error) {
-        console.error("Fehler beim Abgeben der Stimme:", error);
-        res.status(500).json({ message: "Fehler beim Abgeben der Stimme." });
+        console.error("Fehler beim Abstimmen:", error);
+        res.status(500).json({ message: "Fehler beim Abstimmen." });
     }
 });
 
