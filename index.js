@@ -25,7 +25,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 .catch(err => console.error('Verbindungsfehler mit MongoDB:', err));
 
 // POST-Route für Abstimmungen
-app.post('/api/vote', async (req, res) => {
+app.post('/vote', async (req, res) => {
     const { code, voteOption } = req.body;
     
     try {
@@ -39,7 +39,7 @@ app.post('/api/vote', async (req, res) => {
 });
 
 // GET-Route für das Abrufen von Ergebnissen
-app.get('/api/results', async (req, res) => {
+app.get('/results', async (req, res) => {
     try {
         const results = await Vote.aggregate([
             { $group: { _id: "$voteOption", count: { $sum: 1 } } }
