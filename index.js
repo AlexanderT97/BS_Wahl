@@ -14,9 +14,7 @@ app.use(express.json());
 
 // MongoDB-Verbindung
 mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 5000
+    serverSelectionTimeoutMS: 5000 // Timeout für die Verbindung
 })
 .then(() => console.log('Verbunden mit MongoDB'))
 .catch(err => console.error('Fehler bei der Verbindung mit MongoDB:', err));
@@ -25,10 +23,10 @@ mongoose.connect(process.env.MONGODB_URI, {
 // Statische Dateien aus dem "public"-Ordner bereitstellen
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Standard-Route zur Rückgabe von index.html
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
 
 // API-Routen
 app.post('/api/vote', async (req, res) => {
