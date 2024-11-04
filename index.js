@@ -18,7 +18,7 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Standard-Route zur Rückgabe von index.html
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
