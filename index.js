@@ -13,11 +13,9 @@ app.use(cors({
 app.use(express.json());
 
 // MongoDB-Verbindung
-mongoose.connect(process.env.MONGODB_URI, {
-    serverSelectionTimeoutMS: 5000 // Timeout für die Verbindung
-})
-.then(() => console.log('Verbunden mit MongoDB'))
-.catch(err => console.error('Fehler bei der Verbindung mit MongoDB:', err));
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true })
+    .then(() => console.log("Verbunden mit MongoDB"))
+    .catch(err => console.error("Fehler bei der Verbindung mit MongoDB:", err));
 
 
 // Statische Dateien aus dem "public"-Ordner bereitstellen
